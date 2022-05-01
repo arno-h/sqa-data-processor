@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -11,8 +9,11 @@ public class DataProcessor {
     private final HashMap<String, Duration> result = new HashMap<>();
     private final Holidays holidays = new Holidays();
 
-    void process(File data) throws FileNotFoundException, ParseException {
-        Scanner scanner = new Scanner(data);
+    public HashMap<String, Duration> getResult() {
+        return result;
+    }
+
+    void process(Scanner scanner) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         String previousActivity = null;
@@ -30,12 +31,9 @@ public class DataProcessor {
                 previousActivity = activity;
             }
         }
-        for (String activity : result.keySet()) {
-            System.out.printf("Activity %s took %d minutes.\n", activity, result.get(activity).toMinutes());
-        }
     }
 
-    private void sumDuration(String activity, Date previous, Date current) {
+    void sumDuration(String activity, Date previous, Date current) {
         if (previous != null) {
             Duration duration = calcDuration(previous, current);
             if (!result.containsKey(activity)) {
