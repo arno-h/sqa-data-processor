@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class DataProcessor {
     private final HashMap<String, Duration> result = new HashMap<>();
-    private final Holidays holidays = new Holidays();
+    private final Holidays holidays;
+
+    public DataProcessor(Holidays holidays) {
+        this.holidays = holidays;
+    }
 
     public HashMap<String, Duration> getResult() {
         return result;

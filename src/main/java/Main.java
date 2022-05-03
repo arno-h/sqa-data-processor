@@ -14,7 +14,7 @@ public class Main {
         assert pathURL != null;
         File data = new File(pathURL.toURI());
         Scanner scanner = new Scanner(data);
-        DataProcessor dataProcessor = new DataProcessor();
+        DataProcessor dataProcessor = new DataProcessor(new Holidays());
         dataProcessor.process(scanner);
         HashMap<String, Duration> result = dataProcessor.getResult();
         for (String activity : result.keySet()) {

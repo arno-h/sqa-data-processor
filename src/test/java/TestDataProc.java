@@ -8,7 +8,7 @@ import java.util.Date;
 public class TestDataProc {
     @Test
     public void testSum1() {
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date prev = new Date(122, Calendar.MARCH, 1, 12, 55);
         Date cur = new Date(122, Calendar.MARCH, 1, 13, 15);
         dp.sumDuration("abc", prev, cur);
@@ -17,7 +17,7 @@ public class TestDataProc {
 
     @Test
     public void testSum2() {
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date prev = new Date(122, Calendar.MARCH, 1, 12, 55);
         Date cur = new Date(122, Calendar.MARCH, 1, 13, 15);
         Date next = new Date(122, Calendar.MARCH, 1, 13, 40);
@@ -28,7 +28,7 @@ public class TestDataProc {
 
     @Test
     public void testSum3() {
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date cur = new Date(122, Calendar.MARCH, 1, 12, 55);
         dp.sumDuration("abc", null, cur);
         Assert.assertFalse(dp.getResult().containsKey("abc"));
