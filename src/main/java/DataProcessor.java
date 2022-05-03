@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class DataProcessor {
-    HashMap<String, Duration> result = new HashMap<>();
+    private final HashMap<String, Duration> result = new HashMap<>();
+    private final Holidays holidays = new Holidays();
 
     void process(File data) throws FileNotFoundException, ParseException {
         Scanner scanner = new Scanner(data);
@@ -36,12 +37,20 @@ public class DataProcessor {
 
     private void sumDuration(String activity, Date previous, Date current) {
         if (previous != null) {
-            Duration duration = Duration.between(previous.toInstant(), current.toInstant());
+            Duration duration = calcDuration(previous, current);
             if (!result.containsKey(activity)) {
                 result.put(activity, duration);
             } else {
                 result.merge(activity, duration, Duration::plus);
             }
         }
+    }
+
+    private Duration calcDuration(Date previous, Date current) {
+        Duration duration = Duration.between(previous.toInstant(), current.toInstant());
+        if (holidays.isHoliday(previous)) {
+            return duration.multipliedBy(2);
+        }
+        return duration;
     }
 }
