@@ -3,15 +3,15 @@ It calculates the duration of each activity and sums up durations of same activi
 If an activity was started on a holiday, the duration is counted twice.
 
 
-Task 1:
+Task 1 (15%):
 Refactor DataProcessor: File input and System.out are hard to test.
 
-Task 2:
+Task 2 (30%):
 Add test cases for 100% path coverage of DataProcessor::sumDuration() function.
 
-Task 3:
+Task 3 (25%):
 Add two relevant test cases for DataProcessor::calcDuration() that use mocks in order
 to test the doubling of the duration on holidays.
 
-Task 4:
+Task 4 (30%):
 Add two relevant test cases for DataProcessor::process().
