@@ -11,7 +11,7 @@ public class TestSumDuration {
     @Test
     public void testPreviousNull() {
         // setup
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date current = new Date(2022-1900, Calendar.MAY, 3);
         // execute
         dp.sumDuration("test", null, current);
@@ -23,7 +23,7 @@ public class TestSumDuration {
     @Test
     public void testSingleActivity() {
         // setup
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date previous = new Date(2022-1900, Calendar.MAY, 3, 13, 45);
         Date current = new Date(2022-1900, Calendar.MAY, 3, 14, 15);
         // execute
@@ -37,7 +37,7 @@ public class TestSumDuration {
     @Test
     public void testMulitpleActivity() {
         // setup
-        DataProcessor dp = new DataProcessor();
+        DataProcessor dp = new DataProcessor(new Holidays());
         Date previous = new Date(2022-1900, Calendar.MAY, 3, 13, 45);
         Date current = new Date(2022-1900, Calendar.MAY, 3, 14, 15);
         Date later = new Date(2022-1900, Calendar.MAY, 3, 15, 15);

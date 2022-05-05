@@ -9,10 +9,14 @@ import java.util.Scanner;
 
 public class DataProcessor {
     private final HashMap<String, Duration> result = new HashMap<>();
-    private final Holidays holidays = new Holidays();
+    private final Holidays holidays;
 
     public HashMap<String, Duration> getResult() {
         return result;
+    }
+
+    public DataProcessor(Holidays holidays) {
+        this.holidays = holidays;
     }
 
     HashMap<String, Duration> process(Scanner scanner) throws ParseException {
@@ -21,9 +25,7 @@ public class DataProcessor {
         String previousActivity = null;
         Date previousDate = null;
         while (scanner.hasNext()) {
-            String date = scanner.next("\\d+-\\d+-\\d+");
-            String time = scanner.next("\\d+:\\d+");
-            Date dateTime = dateFormat.parse(date + " " + time);
+            Date dateTime = getDate(scanner, dateFormat);
             String activity = scanner.nextLine().trim();
             sumDuration(previousActivity, previousDate, dateTime);
             if ("*".equals(activity)) {
@@ -34,6 +36,13 @@ public class DataProcessor {
             }
         }
         return result;
+    }
+
+    private Date getDate(Scanner scanner, SimpleDateFormat dateFormat) throws ParseException {
+        String date = scanner.next("\\d+-\\d+-\\d+");
+        String time = scanner.next("\\d+:\\d+");
+        Date dateTime = dateFormat.parse(date + " " + time);
+        return dateTime;
     }
 
     void sumDuration(String activity, Date previous, Date current) {
@@ -55,7 +64,7 @@ public class DataProcessor {
         // done: A -> C
     }
 
-    private Duration calcDuration(Date previous, Date current) {
+    Duration calcDuration(Date previous, Date current) {
         Duration duration = Duration.between(previous.toInstant(), current.toInstant());
         if (holidays.isHoliday(previous)) {
             return duration.multipliedBy(2);
