@@ -11,6 +11,10 @@ public class DataProcessor {
     private final HashMap<String, Duration> result = new HashMap<>();
     private final Holidays holidays = new Holidays();
 
+    public HashMap<String, Duration> getResult() {
+        return result;
+    }
+
     HashMap<String, Duration> process(Scanner scanner) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -32,15 +36,23 @@ public class DataProcessor {
         return result;
     }
 
-    private void sumDuration(String activity, Date previous, Date current) {
+    void sumDuration(String activity, Date previous, Date current) {
         if (previous != null) {
+            // A
             Duration duration = calcDuration(previous, current);
             if (!result.containsKey(activity)) {
+                // B
                 result.put(activity, duration);
             } else {
+                // C
                 result.merge(activity, duration, Duration::plus);
             }
-        }
+        } // else D
+
+        // 100% path coverage
+        // done: D
+        // done: A -> B
+        // done: A -> C
     }
 
     private Duration calcDuration(Date previous, Date current) {
