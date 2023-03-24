@@ -15,7 +15,7 @@ public class Main {
         File data = new File(pathURL.toURI());
         FileInputStream dataStream = new FileInputStream(data);
 
-        DataProcessor dataProcessor = new DataProcessor();
+        DataProcessor dataProcessor = new DataProcessor(new Holidays());
         HashMap<String, Duration> result = dataProcessor.process(dataStream);
 
         for (String activity : result.keySet()) {

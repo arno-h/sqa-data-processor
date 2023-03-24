@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class DataProcessor {
     private final HashMap<String, Duration> result = new HashMap<>();
-    private final Holidays holidays = new Holidays();
+    private final Holidays holidays;
+
+    public DataProcessor(Holidays holidays) {
+        this.holidays = holidays;
+    }
 
     HashMap<String, Duration> process(InputStream data) throws ParseException {
         Scanner scanner = new Scanner(data);

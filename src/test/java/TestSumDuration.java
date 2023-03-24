@@ -11,7 +11,7 @@ public class TestSumDuration {
     @Test
     public void singleAction() throws ParseException {
         // given
-        DataProcessor dataProcessor = new DataProcessor();
+        DataProcessor dataProcessor = new DataProcessor(new Holidays());
         String testData =
                 "2023-03-24 11:30  Programmiert\n" +
                 "2023-03-24 12:30  *";
@@ -27,7 +27,7 @@ public class TestSumDuration {
     @Test
     public void singleActionTwice() throws ParseException {
         // given
-        DataProcessor dataProcessor = new DataProcessor();
+        DataProcessor dataProcessor = new DataProcessor(new Holidays());
         String testData =
                 "2023-03-24 11:30  Programmiert\n" +
                 "2023-03-24 11:50  Programmiert\n" +
